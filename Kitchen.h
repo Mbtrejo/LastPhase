@@ -155,7 +155,7 @@ public:
         }
 
         cout << "\nSelect an action:\n";
-        cout << "1.yeet items\n";
+        cout << "1.Insert items\n";
         cout << "2.Extract items\n";
         cout << "3.Close chest\n";
         cin >> XXX;
