@@ -76,9 +76,7 @@ public:
 
         actualObjectDescriptions.push_back(cupboard);
         
-        gameObject closet("closet");
-        
-        actualObjectDescriptions.push_back(closet);
+    
     }
 
     void initKeys(Player *ptr)
@@ -449,8 +447,7 @@ public:
         int take;
 
     
-        cout << endl
-             << actualObjectDescriptions.at(3).getDescription() << " has :\n";
+        cout << "Kitchen closet has :\n";
         
         for (int i=0;i<closet.size();i++)
         {
