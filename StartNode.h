@@ -66,7 +66,10 @@ public:
     }
 
     void outputRoomName()
-    {
+    {   cout << "Welcome to Lost Keys \n";
+        cout << "A game of puzzle solving and discovery\n";
+        cout << "Your goal are to find keys to unlock the next room and collect artifacts to win \n";
+        cout << "Controls are the numbers: 1,2,3,4. Good Luck\n";
         cout << "\nYou are in the start room.\n";
         cout << "\nYou see a chest on a table in the center and four doors.\nYou see an object hanging on the wall, covered with a sheet\n";
         cout<< "\nYou see a statue in the corner\n";
