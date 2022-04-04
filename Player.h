@@ -68,7 +68,7 @@ public:
         inventory->insert(dummyptrX, 26, "Cloud Key");
         inventory->insert(dummyptrX, 27, "Sky Key");
         inventory->insert(dummyptrX, 41, "Brown Key");
-        inventory->insert(dummyptrX, 47, "XXX Key");
+        inventory->insert(dummyptrX, 47, "Echo Key");
         inventory->insert(dummyptrX, 80, "Grey Key");
         inventory->insert(dummyptrX, 75, "Egg Key");
         inventory->insert(dummyptrX, 65, "Dream Key");
