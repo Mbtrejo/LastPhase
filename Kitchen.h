@@ -479,7 +479,7 @@ public:
 
                 if (!player->inventoryFull())
                 {
-                    cout << actualObjectDescriptions.at(3).getDescription() << " has:\n";
+                    cout <<"Kitchen" << " has:\n";
 
                     if (!closet.empty())
                     {
