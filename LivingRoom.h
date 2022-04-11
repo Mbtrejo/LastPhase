@@ -445,19 +445,19 @@ public:
         }
     }
 
- 
 
 
 
-        
-            void closetprompt(Player *player)
+
+
+     void closetprompt(Player *player)
     {
         int choice;
         int XXX;
         int take;
 
 
-        cout << "Living Room closet has :\n";
+        cout << "Dining Room closet has :\n";
 
         for (int i=0;i<closet.size();i++)
         {
@@ -489,7 +489,7 @@ public:
 
                 if (!player->inventoryFull())
                 {
-                    cout << actualObjectDescriptions.at(3).getDescription() << " has:\n";
+                    cout <<"Closet" << " has:\n";
 
                     if (!closet.empty())
                     {
@@ -541,13 +541,10 @@ public:
             cout << "3.Close chest\n";
             cin >> XXX;
             XXX = inputCheck(3, XXX);
-        }
-        
-        
-    }
-        
-        
 
+        }
+
+    }
 };
 
 #endif
