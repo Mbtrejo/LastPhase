@@ -355,7 +355,7 @@ public:
 
             hasLeft = true;
         }
-        else if (choice == 2 && !doors.at(choice)
+        else if (choice == 2 && !doors.at(choice)) /// need parath
             {
             cout << "Pretend this is a thought provoking riddle :D! (water key needed if closet)"; // need riddle if closet
             cout << "\nThe door is locked. Attempt to open it?\n1.Yes\n2.No\n";
@@ -370,12 +370,8 @@ public:
             {
                 cout << "\nYou have no keys\n";
             }
-            }
-        else
-        {
-        }
-    }
-
+}
+    }//added bracket here
     void InputPrompt(Player *player, char X)
     {
 
