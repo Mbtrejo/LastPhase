@@ -8,6 +8,7 @@ private:
     vector<Item *> Coffin;
     vector<Item *> Hamper;
     vector<Item *> Toolbox;
+    vector<Item *> closet;
 
     Item *pickKey(Player *p)
     {
@@ -300,7 +301,7 @@ public:
         {
             Item *attemptkey = pickKey(p);
 
-            if (attemptkey->getKey() == 75) // piano key opens the kitchen
+            if (attemptkey->getKey() == 100) // 100 = water key; might have to change later
             {
                 cout << "\nThe door has been opened!\n";
                 doors.at(0) = true; // open door
@@ -355,12 +356,17 @@ public:
         }
         else
         {
+            cout << "Pretend this is a thought provoking riddle :D! (water key needed if closet)";// need riddle if closet
             cout << "\nThe door is locked. Attempt to open it?\n1.Yes\n2.No\n";
             cin >> choiceB;
-
-            choiceB = inputCheck(2, choiceB);
-
-            Attempt2open(choiceB, user);
+            
+            if (user->numberofAccessibleKeys()>0){
+                
+                Attempt2open(choiceB, user);
+            }
+            else {
+                cout<<"\nYou have no keys\n";
+            }
         }
     }
 
@@ -427,6 +433,100 @@ public:
             displayDoors(player);
         }
     }
+    //Closet Function vv
+    void closetprompt(Player *player)
+{
+        int choice;
+        int XXX;
+        int take;
+
+        cout << "Basement's closet has :\n";
+
+        for (int i=0;i<closet.size();i++)
+        {
+            cout<<closet.at(i)->getDescription()<<endl;
+        }
+
+        cout << "\nSelect an action:\n";
+        cout << "1.Insert items\n";
+        cout << "2.Extract items\n";
+        cout << "3.Close closet\n";
+        cin >> XXX;
+
+        XXX = inputCheck(3, XXX);
+
+
+        while (XXX != 3)
+        {
+            if (XXX == 3)
+        {
+            cout << "\nOkay!\n";
+
+            return;
+        }
+            else if (XXX == 2)
+        {
+            cout << "\nEnter the number of the item to take\n";
+            if (!player->inventoryFull())
+            {
+                cout << actualObjectDescriptions.at(3).getDescription() << " has:\n";
+
+                if (!closet.empty())
+                {
+                    for (int i=1;i<closet.size()+1;i++)
+                    {
+                        cout<<i<<"."<<closet.at(i-1)->getDescription()<<endl;
+                    }
+                }
+                else
+                {
+                    cout << "Closet is empty!" << endl;
+                    return;
+                }
+
+                cin >> take;
+
+                take = inputCheck(closet.size(), take);
+
+                take = take-1;
+
+                Take(closet.at(take), player);
+
+            }
+            else
+                cout << "\nStorage is full!\n";
+        }
+
+        else
+        {
+            int numAccessable = player->numberofAccessibleKeys();
+
+            if (numAccessable == 0)
+            {
+                cout << "\nInventory is empty\n ";
+            }
+            else if (closet.size() == 4)
+            {
+                cout<<"\nCloset is full\n";
+            }
+
+            else
+
+                InputPrompt(player, 'W');
+        }
+
+        cout << "\nSelect an action:\n";
+        cout << "1.Insert items\n";
+        cout << "2.Extract items\n";
+        cout << "3.Close chest\n";
+        cin >> XXX;
+        XXX = inputCheck(3, XXX);
+    }
+    
+    
+}
+    
+    
 };
 
 #endif
