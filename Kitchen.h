@@ -26,10 +26,10 @@ private:
         {
             cout << "\nWhich key would you like to attempt to open the door with?\n";
 
-            for (int i = 1; i < dummy.size()+1; i++)
+            for (int i = 1; i < dummy.size() + 1; i++)
             {
 
-                cout << i << "." << dummy.at(i-1)->getDescription() << endl;
+                cout << i << "." << dummy.at(i - 1)->getDescription() << endl;
             }
 
             cin >> choice;
@@ -75,8 +75,6 @@ public:
         gameObject cupboard("cupboard");
 
         actualObjectDescriptions.push_back(cupboard);
-        
-    
     }
 
     void initKeys(Player *ptr)
@@ -106,9 +104,8 @@ public:
         cupboard.push_back(temp->searchAndReturnNodePointer(27, itemA));
 
         cupboard.push_back(temp->searchAndReturnNodePointer(41, itemA));
-        
+
         closet.push_back(temp->searchAndReturnNodePointer(121, itemA));
-        
     }
 
     void investigate(Player *player)
@@ -162,7 +159,6 @@ public:
 
         XXX = inputCheck(3, XXX);
 
-
         while (XXX != 3)
         {
 
@@ -179,28 +175,28 @@ public:
 
                 if (!player->inventoryFull())
                 {
-                    cout << actualObjectDescriptions.at(choice-1).getDescription() << " has:\n";
+                    cout << actualObjectDescriptions.at(choice - 1).getDescription() << " has:\n";
 
                     if (choice == 1 && pantry.size() != 0)
                     {
-                        for (int i = 1; i < pantry.size()+1; i++)
+                        for (int i = 1; i < pantry.size() + 1; i++)
                         {
-                            cout << i << "." << pantry.at(i-1)->getDescription() << endl;
+                            cout << i << "." << pantry.at(i - 1)->getDescription() << endl;
                         }
                     }
                     else if (choice == 2 && oven.size() != 0)
                     {
 
-                        for (int i = 1; i < oven.size()+1; i++)
+                        for (int i = 1; i < oven.size() + 1; i++)
                         {
-                            cout << i << "." << oven.at(i-1)->getDescription() << endl;
+                            cout << i << "." << oven.at(i - 1)->getDescription() << endl;
                         }
                     }
                     else if (choice == 3 && cupboard.size() != 0)
                     {
-                        for (int i = 1; i < cupboard.size()+1; i++)
+                        for (int i = 1; i < cupboard.size() + 1; i++)
                         {
-                            cout << i << "." << cupboard.at(i-1)->getDescription() << endl;
+                            cout << i << "." << cupboard.at(i - 1)->getDescription() << endl;
                         }
                     }
 
@@ -211,9 +207,9 @@ public:
                     }
 
                     cin >> take;
-                    if (choice==1)
-                    take = inputCheck(pantry.size(), take);
-                    else if (choice==2)
+                    if (choice == 1)
+                        take = inputCheck(pantry.size(), take);
+                    else if (choice == 2)
                         take = inputCheck(oven.size(), take);
                     else
                         take = inputCheck(cupboard.size(), take);
@@ -281,7 +277,6 @@ public:
             cout << "3.Close chest\n";
             cin >> XXX;
             XXX = inputCheck(3, XXX);
-
         }
     }
 
@@ -307,8 +302,6 @@ public:
                 doors.at(1) = true; // open door
                 attemptkey->makeInAccessable();
                 closetprompt(p);
-              
-           
             }
             else
             {
@@ -345,7 +338,7 @@ public:
 
         choice = choice - 1;
 
-        if (doors.at(choice))
+        if (doors.at(choice) && choice == 1)
         {
             cout << "\nThe door is open and you pass through.\n";
             user->Moved(); // set moved to true
@@ -356,20 +349,24 @@ public:
 
             hasLeft = true;
         }
-        else
+        else if (!doors.at(choice) && choice == 2)
         {
-            cout<<"\nA container without hinges,lock,or key\nYet a golden treasure lies inside me\nWhat am I?\n";
+            cout << "\nA container without hinges,lock,or key\nYet a golden treasure lies inside me\nWhat am I?\n";
             cout << "\nThe door is locked. Attempt to open it?\n1.Yes\n2.No\n";
             cin >> choiceB;
 
             choiceB = inputCheck(2, choiceB);
-            
-            if (user->numberofAccessibleKeys()>0)
-            Attempt2open(choiceB, user);
+
+            if (user->numberofAccessibleKeys() > 0)
+                Attempt2open(choiceB, user);
             else
             {
-                cout<<"\nYou have no keys\n";
+                cout << "\nYou have no keys\n";
             }
+        }
+        else
+        {
+            closetprompt(user);
         }
     }
 
@@ -387,9 +384,9 @@ public:
 
         vector<Item *> d = player->returnsVectorOfAccessableKeys();
 
-        for (int i = 1; i < d.size()+1; i++)
+        for (int i = 1; i < d.size() + 1; i++)
         {
-            cout << i << "." << d.at(i-1)->getDescription() << endl;
+            cout << i << "." << d.at(i - 1)->getDescription() << endl;
         }
 
         cin >> index;
@@ -410,7 +407,7 @@ public:
         }
         else if (X == 'c' && cupboard.size() <= 4)
             cupboard.push_back(d.at(index));
-        else if (X=='W' && closet.size()<=4)
+        else if (X == 'W' && closet.size() <= 4)
             closet.push_back(d.at(index));
 
         cout << "\nItem is no longer in inventory\n";
@@ -428,7 +425,6 @@ public:
 
         choice = inputCheck(2, choice);
 
-
         if (choice == 1)
         {
             displayObjects();
@@ -439,30 +435,28 @@ public:
             displayDoors(player);
         }
     }
-    
+
     void closetprompt(Player *player)
     {
         int choice;
         int XXX;
         int take;
 
-    
         cout << "Kitchen closet has :\n";
-        
-        for (int i=0;i<closet.size();i++)
+
+        for (int i = 0; i < closet.size(); i++)
         {
-            cout<<closet.at(i)->getDescription()<<endl;
+            cout << closet.at(i)->getDescription() << endl;
         }
-        
+
         cout << "\nSelect an action:\n";
         cout << "1.Insert items\n";
         cout << "2.Extract items\n";
         cout << "3.Close closet\n";
         cin >> XXX;
-        
+
         XXX = inputCheck(3, XXX);
-        
-        
+
         while (XXX != 3)
         {
 
@@ -479,13 +473,14 @@ public:
 
                 if (!player->inventoryFull())
                 {
-                    cout <<"Kitchen" << " has:\n";
+                    cout << "Kitchen"
+                         << " has:\n";
 
                     if (!closet.empty())
                     {
-                        for (int i=1;i<closet.size()+1;i++)
+                        for (int i = 1; i < closet.size() + 1; i++)
                         {
-                            cout<<i<<"."<<closet.at(i-1)->getDescription()<<endl;
+                            cout << i << "." << closet.at(i - 1)->getDescription() << endl;
                         }
                     }
                     else
@@ -495,13 +490,14 @@ public:
                     }
 
                     cin >> take;
-                    
+
                     take = inputCheck(closet.size(), take);
-                    
-                    take = take-1;
-                   
+
+                    take = take - 1;
+
                     Take(closet.at(take), player);
-                    
+
+                    closet.erase(closet.begin() + take);
                 }
                 else
                     cout << "\nStorage is full!\n";
@@ -517,7 +513,7 @@ public:
                 }
                 else if (closet.size() == 4)
                 {
-                    cout<<"\nCloset is full\n";
+                    cout << "\nCloset is full\n";
                 }
 
                 else
@@ -531,16 +527,8 @@ public:
             cout << "3.Close chest\n";
             cin >> XXX;
             XXX = inputCheck(3, XXX);
-
         }
-        
     }
-    
-    
-    
-
-
-    
 };
 
 #endif

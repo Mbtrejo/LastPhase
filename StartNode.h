@@ -522,6 +522,7 @@ public:
                 statue.push_back(dummy.at(x));
                 cout << "\nItem is no longer in inventory.\n";
                 updateAndDisplayInventory(player);
+                checkIfGameWon();
                 return;
 
             }
@@ -660,7 +661,7 @@ public:
     {
         int x = 0;
 
-        for (std::list<Item *>::iterator it;it!=statue.end();it++)
+        for (std::list<Item *>::iterator it =  statue.begin();it!=statue.end();it++)
         {
             if ( (*it)->getKey() == 120 || (*it)->getKey() == 110 || (*it)->getKey() == 90 || (*it)->getKey() == 121  )
             {

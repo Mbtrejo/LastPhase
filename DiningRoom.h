@@ -6,7 +6,6 @@
 class DiningRoom : public Room
 {
 private:
-
     vector<Item *> Hutch;
     vector<Item *> Wine_Rack;
     vector<Item *> Bench;
@@ -29,16 +28,15 @@ private:
         {
             cout << "\nWhich key would you like to attempt to open the door with?\n";
 
-            for (int i = 1; i < dummy.size()+1; i++)
+            for (int i = 1; i < dummy.size() + 1; i++)
             {
 
-                cout << i << "." << dummy.at(i-1)->getDescription() << endl;
+                cout << i << "." << dummy.at(i - 1)->getDescription() << endl;
             }
 
             cin >> choice;
 
             choice = inputCheck(dummy.size(), choice);
-
 
             choice = choice - 1;
 
@@ -109,7 +107,7 @@ public:
 
         Bench.push_back(temp->searchAndReturnNodePointer(350, itemA));
 
-        //closet
+        // closet
 
         closet.push_back(temp->searchAndReturnNodePointer(110, itemA));
     }
@@ -166,7 +164,6 @@ public:
 
         XXX = inputCheck(3, XXX);
 
-
         while (XXX != 3)
         {
 
@@ -183,28 +180,28 @@ public:
 
                 if (!player->inventoryFull())
                 {
-                    cout << actualObjectDescriptions.at(choice-1).getDescription() << " has:\n";
+                    cout << actualObjectDescriptions.at(choice - 1).getDescription() << " has:\n";
 
                     if (choice == 1 && Hutch.size() != 0)
                     {
-                        for (int i = 1; i < Hutch.size()+1; i++)
+                        for (int i = 1; i < Hutch.size() + 1; i++)
                         {
-                            cout << i << "." << Hutch.at(i-1)->getDescription() << endl;
+                            cout << i << "." << Hutch.at(i - 1)->getDescription() << endl;
                         }
                     }
                     else if (choice == 2 && Wine_Rack.size() != 0)
                     {
 
-                        for (int i = 1; i < Wine_Rack.size()+1; i++)
+                        for (int i = 1; i < Wine_Rack.size() + 1; i++)
                         {
-                            cout << i << "." << Wine_Rack.at(i-1)->getDescription() << endl;
+                            cout << i << "." << Wine_Rack.at(i - 1)->getDescription() << endl;
                         }
                     }
                     else if (choice == 3 && Bench.size() != 0)
                     {
-                        for (int i = 1; i < Bench.size()+1; i++)
+                        for (int i = 1; i < Bench.size() + 1; i++)
                         {
-                            cout << i << "." << Bench.at(i-1)->getDescription() << endl;
+                            cout << i << "." << Bench.at(i - 1)->getDescription() << endl;
                         }
                     }
 
@@ -216,9 +213,9 @@ public:
 
                     cin >> take;
 
-                    if (choice==1)
-                    take = inputCheck(Hutch.size(), take);
-                    else if (choice==2)
+                    if (choice == 1)
+                        take = inputCheck(Hutch.size(), take);
+                    else if (choice == 2)
                         take = inputCheck(Wine_Rack.size(), take);
                     else
                         take = inputCheck(Bench.size(), take);
@@ -287,7 +284,6 @@ public:
             cout << "3.Close chest\n";
             cin >> XXX;
             XXX = inputCheck(3, XXX);
-
         }
     }
 
@@ -313,8 +309,6 @@ public:
                 doors.at(1) = true; // open door
                 attemptkey->makeInAccessable();
                 closetprompt(p);
-
-
             }
             else
             {
@@ -351,7 +345,7 @@ public:
 
         choice = choice - 1;
 
-        if (doors.at(choice))
+        if (doors.at(choice) && choice == 0)
         {
             cout << "\nThe door is open and you pass through.\n";
             user->Moved(); // set moved to true
@@ -362,13 +356,18 @@ public:
 
             hasLeft = true;
         }
-        else
-        {   cout << "\nI speak without a mouth.\n";
+        else if (!doors.at(choice) && choice == 1)
+        {
+            cout << "\nI speak without a mouth.\n";
             cout << "\nThe door is locked. Attempt to open it?\n1.Yes\n2.No\n";
             cin >> choiceB;
 
             choiceB = inputCheck(2, choiceB);
             Attempt2open(choiceB, user);
+        }
+        else
+        {
+            closetprompt(user);
         }
     }
 
@@ -386,9 +385,9 @@ public:
 
         vector<Item *> d = player->returnsVectorOfAccessableKeys();
 
-        for (int i = 1; i < d.size()+1; i++)
+        for (int i = 1; i < d.size() + 1; i++)
         {
-            cout << i << "." << d.at(i-1)->getDescription() << endl;
+            cout << i << "." << d.at(i - 1)->getDescription() << endl;
         }
 
         cin >> index;
@@ -408,7 +407,7 @@ public:
         }
         else if (X == 'c' && Bench.size() <= 4)
             Bench.push_back(d.at(index));
-        else if (X=='W' && closet.size()<=4)
+        else if (X == 'W' && closet.size() <= 4)
             closet.push_back(d.at(index));
 
         cout << "\nItem is no longer in inventory\n";
@@ -424,9 +423,7 @@ public:
 
         cin >> choice;
 
-
         choice = inputCheck(2, choice);
-
 
         if (choice == 1)
         {
@@ -444,12 +441,11 @@ public:
         int XXX;
         int take;
 
-
         cout << "Dining Room closet has :\n";
 
-        for (int i=0;i<closet.size();i++)
+        for (int i = 0; i < closet.size(); i++)
         {
-            cout<<closet.at(i)->getDescription()<<endl;
+            cout << closet.at(i)->getDescription() << endl;
         }
 
         cout << "\nSelect an action:\n";
@@ -459,7 +455,6 @@ public:
         cin >> XXX;
 
         XXX = inputCheck(3, XXX);
-
 
         while (XXX != 3)
         {
@@ -477,13 +472,14 @@ public:
 
                 if (!player->inventoryFull())
                 {
-                    cout <<"Closet" << " has:\n";
+                    cout << "Closet"
+                         << " has:\n";
 
                     if (!closet.empty())
                     {
-                        for (int i=1;i<closet.size()+1;i++)
+                        for (int i = 1; i < closet.size() + 1; i++)
                         {
-                            cout<<i<<"."<<closet.at(i-1)->getDescription()<<endl;
+                            cout << i << "." << closet.at(i - 1)->getDescription() << endl;
                         }
                     }
                     else
@@ -496,10 +492,10 @@ public:
 
                     take = inputCheck(closet.size(), take);
 
-                    take = take-1;
+                    take = take - 1;
 
                     Take(closet.at(take), player);
-
+                    closet.erase(closet.begin() + take);
                 }
                 else
                     cout << "\nStorage is full!\n";
@@ -515,7 +511,7 @@ public:
                 }
                 else if (closet.size() == 4)
                 {
-                    cout<<"\nCloset is full\n";
+                    cout << "\nCloset is full\n";
                 }
 
                 else
@@ -529,9 +525,7 @@ public:
             cout << "3.Close chest\n";
             cin >> XXX;
             XXX = inputCheck(3, XXX);
-
         }
-
     }
 };
 
