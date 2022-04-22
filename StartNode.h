@@ -7,7 +7,7 @@ class StartNode : public Room
 private:
     vector<Item *> keys;
     std::list<Item *> statue;
-    string riddle;                               // contains riddle, each room will have a different riddle
+    string riddle; // contains riddle, each room will have a different riddle
     string riddleB;
     string riddleC;
     string riddleD;
@@ -29,10 +29,10 @@ private:
         {
             cout << "\nWhich key would you like to attempt to open the door with?\n";
 
-            for (int i = 1; i < dummy.size()+1; i++)
+            for (int i = 1; i < dummy.size() + 1; i++)
             {
 
-                cout << i << "." << dummy.at(i-1)->getDescription() << endl;
+                cout << i << "." << dummy.at(i - 1)->getDescription() << endl;
             }
 
             cin >> choice;
@@ -71,11 +71,11 @@ public:
         cout << "\"->Welcome to Lost Keys\"\n";
         cout << "\"> A game of puzzle solving and discovery\"\n";
         cout << "\"~ Your goal are to find keys to unlock the next room and \"\n";
-        cout<< "\"-->collect artifacts to win\" \n";
+        cout << "\"-->collect artifacts to win\" \n";
         cout << "\"-Controls are the numbers: 1,2,3,4. Good Luck\"\n";
         cout << "\nYou are in the start room.\n";
         cout << "\nYou see a chest on a table in the center and four doors.\nYou see an object hanging on the wall, covered with a sheet\n";
-        cout<< "\nYou see a statue in the corner\n";
+        cout << "\nYou see a statue in the corner\n";
     }
 
     void initObjects()
@@ -110,8 +110,6 @@ public:
 
         cin >> choice;
 
-
-
         choice = inputCheck(3, choice);
 
         if (choice == 3)
@@ -120,7 +118,7 @@ public:
             return;
         }
 
-        if (choice ==2)
+        if (choice == 2)
         {
             exit(0);
         }
@@ -154,14 +152,14 @@ public:
 
             if (XXX == 2)
             {
-                if (!player->inventoryFull() && keys.size()!=0)
+                if (!player->inventoryFull() && keys.size() != 0)
                 {
                     cout << "\nWhich item would you like to take:\n";
                     int i = 1;
-                    while (i-1 < keys.size())
+                    while (i - 1 < keys.size())
                     {
 
-                        cout << i << "." << keys.at(i-1)->getDescription() << endl;
+                        cout << i << "." << keys.at(i - 1)->getDescription() << endl;
                         i++;
                     }
 
@@ -170,7 +168,6 @@ public:
                     take = inputCheck(keys.size(), take);
 
                     take = take - 1;
-
 
                     if (take < keys.size() && !player->inventoryFull())
                     {
@@ -188,7 +185,7 @@ public:
                     cout << "\nStorage is full!\n";
                 else
                 {
-                    cout<<"\nThe chest is empty\n";
+                    cout << "\nThe chest is empty\n";
                     return;
                 }
             }
@@ -216,7 +213,6 @@ public:
             cin >> XXX;
 
             XXX = inputCheck(3, XXX);
-
         }
     }
 
@@ -285,13 +281,13 @@ public:
                 return;
             }
 
-            if (choice == 1 && !doors.at(1) )
+            if (choice == 1 && !doors.at(1))
             {
 
                 if (attemptkey->getKey() == 40) // coffin key opens the basement
                 {
                     cout << "\nThe door has been opened!\n";
-                    doors.at(1) = true;         // open door
+                    doors.at(1) = true;           // open door
                     room_ID_of_destination = 666; // kitchen is north
                     u->Moved();
                     hasLeft = true;
@@ -313,81 +309,79 @@ public:
                 }
             }
 
-            if ( choice == 2 && doors.at(2) )
-                        {
-                            cout << "\nThe door has been opened!\n";
-                            room_ID_of_destination = 777; // ID of Living Room
-                            u->Moved();
-                            hasLeft = true;
-                            return;
-                        }
+            if (choice == 2 && doors.at(2))
+            {
+                cout << "\nThe door has been opened!\n";
+                room_ID_of_destination = 777; // ID of Living Room
+                u->Moved();
+                hasLeft = true;
+                return;
+            }
 
-            if (choice == 2 && !doors.at(2) )
-                        {
-                            if (attemptkey->getKey() == 10) // Plant key opens the Living Room
-                            {
-                                cout << "\nThe door has been opened!\n";
-                                doors.at(2) = true;         // open door
-                                room_ID_of_destination = 777; // ID for Living Room ; East Door
-                                u->Moved();
-                                hasLeft = true;
+            if (choice == 2 && !doors.at(2))
+            {
+                if (attemptkey->getKey() == 10) // Plant key opens the Living Room
+                {
+                    cout << "\nThe door has been opened!\n";
+                    doors.at(2) = true;           // open door
+                    room_ID_of_destination = 777; // ID for Living Room ; East Door
+                    u->Moved();
+                    hasLeft = true;
 
-                                attemptkey->makeInAccessable();
+                    attemptkey->makeInAccessable();
 
-                                for (int i = 0; i < keys.size(); i++)
-                                {
-                                    if (keys.at(i)->getKey() == 10)
-                                        keys.erase(keys.begin() + i); // take away key from chest
-                                }
+                    for (int i = 0; i < keys.size(); i++)
+                    {
+                        if (keys.at(i)->getKey() == 10)
+                            keys.erase(keys.begin() + i); // take away key from chest
+                    }
 
-                                return;
-                            }
-                            else
-                            {
-                                cout << "\nThat is the wrong Key!\n";
-                                return;
-                            }
-                        }
+                    return;
+                }
+                else
+                {
+                    cout << "\nThat is the wrong Key!\n";
+                    return;
+                }
+            }
 
-                    if ( choice == 3 && doors.at(3) )
-                        {
-                            cout << "\nThe door has been opened!\n";
-                            room_ID_of_destination = 321; // ID of Living Room
-                            u->Moved();
-                            hasLeft = true;
-                            return;
-                        }
+            if (choice == 3 && doors.at(3))
+            {
+                cout << "\nThe door has been opened!\n";
+                room_ID_of_destination = 321; // ID of Living Room
+                u->Moved();
+                hasLeft = true;
+                return;
+            }
 
-                    if (choice == 3 && !doors.at(3) )
-                        {
-                            if (attemptkey->getKey() == 20) // Plant key opens the Living Room
-                            {
-                                cout << "\nThe door has been opened!\n";
-                                doors.at(3) = true;         // open door
-                                room_ID_of_destination = 321; // ID for Living Room ; East Door
-                                u->Moved();
-                                hasLeft = true;
+            if (choice == 3 && !doors.at(3))
+            {
+                if (attemptkey->getKey() == 20) // Plant key opens the Living Room
+                {
+                    cout << "\nThe door has been opened!\n";
+                    doors.at(3) = true;           // open door
+                    room_ID_of_destination = 321; // ID for Living Room ; East Door
+                    u->Moved();
+                    hasLeft = true;
 
-                                attemptkey->makeInAccessable();
+                    attemptkey->makeInAccessable();
 
-                                for (int i = 0; i < keys.size(); i++)
-                                {
-                                    if (keys.at(i)->getKey() == 20)
-                                        keys.erase(keys.begin() + i); // take away key from chest
-                                }
+                    for (int i = 0; i < keys.size(); i++)
+                    {
+                        if (keys.at(i)->getKey() == 20)
+                            keys.erase(keys.begin() + i); // take away key from chest
+                    }
 
-                                return;
-                            }
-                            else
-                            {
-                                cout << "\nThat is the wrong Key!\n";
-                                return;
-                            }
-                        }
-
-
+                    return;
+                }
+                else
+                {
+                    cout << "\nThat is the wrong Key!\n";
+                    return;
+                }
+            }
         }
-            // TODO: the rest of the doors once they're created
+        // TODO: the rest of the doors once they're created
     }
     void initDoors()
     {
@@ -422,7 +416,7 @@ public:
             cout << "\nThe door is locked. Would you like to attempt to open it?\n1.Yes\n2.No\n";
             cin >> choiceB;
 
-            choiceB = inputCheck(2,choiceB);
+            choiceB = inputCheck(2, choiceB);
 
             if (choiceB == 1)
                 Attempt2open(choice, user);
@@ -434,59 +428,54 @@ public:
             room_ID_of_destination = 666;
             user->Moved(); // set moved to true
             hasLeft = true;
-
         }
         else if (!doors.at(choice) && choice == 1)
         {
             cout << riddleB;
             cout << "\nThe door is locked. Would you like to attempt to open it?\n1.Yes\n2.No\n";
             cin >> choiceB;
-            choiceB = inputCheck(2,choiceB);
+            choiceB = inputCheck(2, choiceB);
 
             if (choiceB == 1)
                 Attempt2open(choice, user);
-
         }
 
-
         else if (!doors.at(choice) && choice == 2)
-               {
-                   cout << riddleC;
-                   cout << "\nThe door is locked. Would you like to attempt to open it?\n1.Yes\n2.No\n";
-                   cin >> choiceB;
-                   choiceB = inputCheck(2,choiceB);
+        {
+            cout << riddleC;
+            cout << "\nThe door is locked. Would you like to attempt to open it?\n1.Yes\n2.No\n";
+            cin >> choiceB;
+            choiceB = inputCheck(2, choiceB);
 
-                   if (choiceB == 1)
-                       Attempt2open(choice, user);
-
-               }
+            if (choiceB == 1)
+                Attempt2open(choice, user);
+        }
 
         else if (doors.at(choice) && choice == 2)
-               {
-                   cout << "\nThe door is open and you pass through.\n";
-                   room_ID_of_destination = 777;
-                   user->Moved(); // set moved to true
-                   hasLeft = true;
-               }
+        {
+            cout << "\nThe door is open and you pass through.\n";
+            room_ID_of_destination = 777;
+            user->Moved(); // set moved to true
+            hasLeft = true;
+        }
         else if (!doors.at(choice) && choice == 3)
-               {
-                   cout << riddleD;
-                   cout << "\nThe door is locked. Would you like to attempt to open it?\n1.Yes\n2.No\n";
-                   cin >> choiceB;
-                   choiceB = inputCheck(2,choiceB);
+        {
+            cout << riddleD;
+            cout << "\nThe door is locked. Would you like to attempt to open it?\n1.Yes\n2.No\n";
+            cin >> choiceB;
+            choiceB = inputCheck(2, choiceB);
 
-                   if (choiceB == 1)
-                       Attempt2open(choice, user);
-
-               }
+            if (choiceB == 1)
+                Attempt2open(choice, user);
+        }
 
         else if (doors.at(choice) && choice == 3)
-               {
-                   cout << "\nThe door is open and you pass through.\n";
-                   room_ID_of_destination = 321;
-                   user->Moved(); // set moved to true
-                   hasLeft = true;
-               }
+        {
+            cout << "\nThe door is open and you pass through.\n";
+            room_ID_of_destination = 321;
+            user->Moved(); // set moved to true
+            hasLeft = true;
+        }
     }
     void InputPrompt(Player *player, char X) // from player->objects
     {
@@ -497,7 +486,6 @@ public:
     void inputItemsintoGameObjects(Player *player, char X) // from player->objects
     {
 
-
         int x;
 
         int numA = player->getInventory()->numberOfaccessibleKeys();
@@ -505,27 +493,26 @@ public:
         vector<Item *> dummy = player->returnsVectorOfAccessableKeys();
 
         cout << "\nWhat would you like to place in the object?\n Enter number:\n";
-        for (int i = 1; i < numA+1; i++)
+        for (int i = 1; i < numA + 1; i++)
         {
 
-            cout << i << "." << dummy.at(i-1)->getDescription() << endl;
+            cout << i << "." << dummy.at(i - 1)->getDescription() << endl;
         }
         cin >> x;
 
         x = inputCheck(numA, x);
 
-        x-=1;
+        x -= 1;
 
-            if (X=='S')
-            {
-                dummy.at(x)->makeInAccessable();
-                statue.push_back(dummy.at(x));
-                cout << "\nItem is no longer in inventory.\n";
-                updateAndDisplayInventory(player);
-                checkIfGameWon();
-                return;
-
-            }
+        if (X == 'S')
+        {
+            dummy.at(x)->makeInAccessable();
+            statue.push_back(dummy.at(x));
+            cout << "\nItem is no longer in inventory.\n";
+            updateAndDisplayInventory(player);
+            checkIfGameWon();
+            return;
+        }
 
         dummy.at(x)->makeInAccessable();
 
@@ -550,10 +537,9 @@ public:
         {
             displayObjects();
 
-            cout<<"2.Covered-hanging object"<<endl;
+            cout << "2.Covered-hanging object" << endl;
 
-            cout<<"3.Statue"<<endl;
-
+            cout << "3.Statue" << endl;
 
             investigate(player);
         }
@@ -563,121 +549,111 @@ public:
         }
     }
 
-
-
     void statueOptions(Player *player)
     {
         Item *keyy;
         int choice;
         int x;
-        int i=0;
-        int w = 1;
+
         cout << "\nSelect an action:\n";
         cout << "1.Insert items\n";
         cout << "2.Extract items\n";
         cout << "3.Leave statue\n";
 
-        cin>>choice;
+        cin >> choice;
 
         choice = inputCheck(3, choice);
 
-        while (choice!=3)
+        while (choice != 3)
         {
 
-
-         if (choice == 2)
-        {
-            if (statue.size()==0)
-                cout<<"\nStatue is empty\n";
-
-            else
+            if (choice == 2)
             {
-                cout<<"Statue has "<<endl;
+                if (statue.size() == 0)
+                    cout << "\nStatue is empty\n";
 
-
-            for (std::list<Item *> ::iterator it = statue.begin();it!= statue.end();it++)
-            {
-                i++;
-                cout<<i<<"."<<(*it)->getDescription();
-            }
-
-            cout<<"\nWhich would you like to take?\n"<<endl;
-            cin>>x;
-
-            x = inputCheck(statue.size(), x);
-
-            for (std::list<Item *> ::iterator it = statue.begin();it!= statue.end();it++)
-            {
-                if (w==i)
+                else
                 {
-                    keyy = (*it);
-
-                    if (!player->inventoryFull())
+                    cout << "Statue has " << endl;
+                    int i = 0;
+                    for (std::list<Item *>::iterator it = statue.begin(); it != statue.end(); it++)
                     {
-                        keyy->makeAccessable();
-                        statue.erase(it);
-                        updateAndDisplayInventory(player);
-                    }
-                    else
-                    {
-                        cout<<"\nPlayer inventory is full!\n";
-                        return;
+                        i++;
+                        cout << i << "." << (*it)->getDescription() << endl;
                     }
 
+                    cout << "\nWhich would you like to take?\n"
+                         << endl;
+                    cin >> x;
+
+                    x = inputCheck(statue.size(), x);
+
+                    int w = 1;
+
+                    for (std::list<Item *>::iterator it = statue.begin(); it != statue.end(); it++)
+                    {
+                        if (w == i)
+                        {
+
+                            keyy = (*it);
+
+                            if (!player->inventoryFull())
+                            {
+                                keyy->makeAccessable();
+                                statue.erase(it);
+                                updateAndDisplayInventory(player);
+                            }
+                            else
+                            {
+                                cout << "\nPlayer inventory is full!\n";
+                                return;
+                            }
+                        }
+
+                        w++;
+                    }
                 }
-                w++;
-            }
-
-
-        }
-
-        }
-        else
-        {
-
-            if (player->numberofAccessibleKeys() == 0)
-            {
-                cout << "\nInventory is empty!\n";
-
-
             }
             else
             {
-            inputItemsintoGameObjects(player, 'S');
+
+                if (player->numberofAccessibleKeys() == 0)
+                {
+                    cout << "\nInventory is empty!\n";
+                }
+                else
+                {
+                    inputItemsintoGameObjects(player, 'S');
+                }
             }
-        }
 
             cout << "\nSelect an action:\n";
             cout << "1.Insert items\n";
             cout << "2.Extract items\n";
             cout << "3.Leave statue\n";
 
-            cin>>choice;
-    }
-
+            cin >> choice;
+        }
     }
 
     void checkIfGameWon()
     {
         int x = 0;
 
-        for (std::list<Item *>::iterator it =  statue.begin();it!=statue.end();it++)
+        for (std::list<Item *>::iterator it = statue.begin(); it != statue.end(); it++)
         {
-            if ( (*it)->getKey() == 120 || (*it)->getKey() == 110 || (*it)->getKey() == 90 || (*it)->getKey() == 121  )
+            if ((*it)->getKey() == 120 || (*it)->getKey() == 110 || (*it)->getKey() == 90 || (*it)->getKey() == 121)
             {
                 x++;
             }
-
         }
 
-        if (x==4)
+        if (x == 4)
         {
-            cout<<"Game has been won! You've escaped!";
+            cout << "Game has been won! You've escaped!";
             exit(666);
         }
     }
-
-
 };
 
 #endif
