@@ -338,7 +338,7 @@ public:
 
         choice = choice - 1;
 
-        if (doors.at(choice) && choice == 1)
+        if (doors.at(choice) && choice == 0)
         {
             cout << "\nThe door is open and you pass through.\n";
             user->Moved(); // set moved to true
@@ -349,7 +349,7 @@ public:
 
             hasLeft = true;
         }
-        else if (!doors.at(choice) && choice == 2)
+        else if (!doors.at(choice) && choice == 1)
         {
             cout << "\nA container without hinges,lock,or key\nYet a golden treasure lies inside me\nWhat am I?\n";
             cout << "\nThe door is locked. Attempt to open it?\n1.Yes\n2.No\n";

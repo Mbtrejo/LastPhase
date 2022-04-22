@@ -344,7 +344,7 @@ public:
 
         choice = choice - 1;
 
-        if (doors.at(choice) && choice == 1)
+        if (doors.at(choice) && choice == 0)
         {
             cout << "\nThe door is open and you pass through.\n";
             user->Moved(); // set moved to true
@@ -355,7 +355,7 @@ public:
 
             hasLeft = true;
         }
-        else if (!doors.at(choice) && choice == 2)
+        else if (!doors.at(choice) && choice == 1)
         {
 
             cout << "\nWithout life, I still grow.\nWithout lungs, yet I still need air.\n";
