@@ -586,9 +586,9 @@ public:
                          << endl;
                     cin >> x;
 
-                    x = x - 1;
-
                     x = inputCheck(statue.size(), x);
+
+                    x = x - 1;
 
                     int w = 1;
 
@@ -604,6 +604,7 @@ public:
                                 keyy->makeAccessable();
                                 statue.erase(it);
                                 updateAndDisplayInventory(player);
+                                break;
                             }
                             else
                             {
