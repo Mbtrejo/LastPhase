@@ -590,11 +590,11 @@ public:
 
                     x = x - 1;
 
-                    int w = 1;
+                    int w = 0;
 
                     for (std::list<Item *>::iterator it = statue.begin(); it != statue.end(); it++)
                     {
-                        if (w == i)
+                        if (w == x)
                         {
 
                             keyy = (*it);
@@ -602,7 +602,7 @@ public:
                             if (!player->inventoryFull())
                             {
                                 keyy->makeAccessable();
-                                statue.erase(it);
+                                statue.remove(keyy);
                                 updateAndDisplayInventory(player);
                                 break;
                             }
@@ -626,7 +626,14 @@ public:
                 }
                 else
                 {
-                    inputItemsintoGameObjects(player, 'S');
+                    if (statue.size() < 4)
+                    {
+                        inputItemsintoGameObjects(player, 'S');
+                    }
+                    else
+                    {
+                        cout << "Statue is full" << endl;
+                    }
                 }
             }
 
