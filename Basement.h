@@ -336,7 +336,7 @@ public:
     {
         int choice;
         int choiceB;
-        cout << "\nWhich door would you like to investigate:\n1.StartRoom Door\n2.ClosetB Door\n";
+        cout << "\nWhich door would you like to investigate:\n1.StartRoom Door\n2.Closet_B Door\n";
 
         cin >> choice;
 

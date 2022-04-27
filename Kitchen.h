@@ -330,7 +330,7 @@ public:
     {
         int choice;
         int choiceB;
-        cout << "\nWhich door would you like to investigate:\n1.StartRoom Door\n2.ClosetA Door\n";
+        cout << "\nWhich door would you like to investigate:\n1.StartRoom Door\n2.Closet_A Door\n";
 
         cin >> choice;
 
@@ -482,14 +482,7 @@ public:
                         {
                             cout << i << "." << closet.at(i - 1)->getDescription() << endl;
                         }
-                    }
-                    else
-                    {
-                        cout << "Closet is empty!" << endl;
-                        return;
-                    }
-
-                    cin >> take;
+                         cin >> take;
 
                     take = inputCheck(closet.size(), take);
 
@@ -498,6 +491,14 @@ public:
                     Take(closet.at(take), player);
 
                     closet.erase(closet.begin() + take);
+                    }
+                    else
+                    {
+                        cout << "Closet is empty!" << endl;
+                        
+                    }
+
+                    
                 }
                 else
                     cout << "\nStorage is full!\n";

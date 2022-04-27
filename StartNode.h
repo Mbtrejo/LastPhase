@@ -586,6 +586,8 @@ public:
                          << endl;
                     cin >> x;
 
+                    x = x - 1;
+
                     x = inputCheck(statue.size(), x);
 
                     int w = 1;
