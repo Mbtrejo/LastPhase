@@ -60,6 +60,10 @@ public:
 
     void outputRoomName()
     {
+        cout << "\"> You have entered the room. A Basement which could be a replacement for a morgue.\"\n";
+        cout << "\"> A small coffin lays on the floor, the occupant's name, forever lost.\"\n";
+        cout << "\"> A hamper filled with old clothes, untampered by any human interaction.\"\n";
+        cout << "\"> A Toolbox lays unlocked in the corner of the room.\"\n";
         cout << "\nYou are in the Basement.\nYou see a Coffin, an Hamper, and a Toolbox.\n";
     }
 
@@ -336,7 +340,7 @@ public:
     {
         int choice;
         int choiceB;
-        cout << "\nWhich door would you like to investigate:\n1.StartRoom Door\n2.ClosetB Door\n";
+        cout << "\nWhich door would you like to investigate:\n1.StartRoom Door\n2.Closet_B Door\n";
 
         cin >> choice;
 
@@ -344,7 +348,7 @@ public:
 
         choice = choice - 1;
 
-        if (doors.at(choice) && choice == 1)
+        if (doors.at(0) && choice == 0)
         {
             cout << "\nThe door is open and you pass through.\n";
             user->Moved(); // set moved to true
@@ -355,9 +359,9 @@ public:
 
             hasLeft = true;
         }
-        else if (choice == 2 && !doors.at(choice)) /// need parath
-            {
-            cout << "Pretend this is a thought provoking riddle :D! (water key needed if closet)"; // need riddle if closet
+        else if (choice == 1 && !doors.at(1)) /// need parath
+        {
+            cout << "I can be sparkling but I’m not a star. I can run but I don’t have any legs. I can fall but I don’t get hurt. What am I?";
             cout << "\nThe door is locked. Attempt to open it?\n1.Yes\n2.No\n";
             cin >> choiceB;
 
@@ -370,8 +374,12 @@ public:
             {
                 cout << "\nYou have no keys\n";
             }
-}
-    }//added bracket here
+        }
+        else if (choice == 1 && doors.at(1))
+        {
+            closetprompt(user);
+        }
+    } // added bracket here
     void InputPrompt(Player *player, char X)
     {
 
@@ -407,7 +415,13 @@ public:
             Coffin.push_back(d.at(index));
         }
         else if (X == 'c' && Toolbox.size() <= 4)
+        {
             Toolbox.push_back(d.at(index));
+        }
+        else if (X == 'W' && closet.size() <= 4)
+        {
+            closet.push_back(d.at(index));
+        }
 
         cout << "\nItem is no longer in inventory\n";
 
@@ -442,7 +456,7 @@ public:
         int XXX;
         int take;
 
-        cout << "Dining Room closet has :\n";
+        cout << "Basement closet has :\n";
 
         for (int i = 0; i < closet.size(); i++)
         {
@@ -482,20 +496,27 @@ public:
                         {
                             cout << i << "." << closet.at(i - 1)->getDescription() << endl;
                         }
+
+                        cin >> take;
+
+                        take = inputCheck(closet.size(), take);
+
+                        take = take - 1;
+
+                        Take(closet.at(take), player);
+
+                        for (int i = 0; i < closet.size(); i++)
+                        {
+                            if (closet.at(i) == closet.at(take))
+                            {
+                                closet.erase(closet.begin() + i);
+                            }
+                        }
                     }
                     else
                     {
                         cout << "Closet is empty!" << endl;
-                        return;
                     }
-
-                    cin >> take;
-
-                    take = inputCheck(closet.size(), take);
-
-                    take = take - 1;
-
-                    Take(closet.at(take), player);
                 }
                 else
                     cout << "\nStorage is full!\n";

@@ -60,7 +60,10 @@ public:
     }
 
     void outputRoomName()
-    {
+    {   cout << "\"> You have entered the room. A dining room, no longer fit dine in.\"\n";
+        cout << "\"> A Hutch left with much stains of unknown origins. Stands in the coner of the room.\"\n";
+        cout<< "\"> A Wine Rack still packed with wine from 1941, however the liquors lack its former beauty.\"\n";
+        cout << "\"> Right next to the Wine Rack lies a Bench, drenched with a red liquid.\"\n";
         cout << "\nYou are in the Dining Room.\nYou see a Hutch, a Wine Rack, and a Bench.\n";
     }
 
@@ -337,7 +340,7 @@ public:
     {
         int choice;
         int choiceB;
-        cout << "\nWhich door would you like to investigate:\n1.Start Room Door\n2.ClosetC Door\n";
+        cout << "\nWhich door would you like to investigate:\n1.Start Room Door\n2.Closet_C Door\n";
 
         cin >> choice;
 
@@ -481,21 +484,19 @@ public:
                         {
                             cout << i << "." << closet.at(i - 1)->getDescription() << endl;
                         }
+                        cin >> take;
+
+                        take = inputCheck(closet.size(), take);
+
+                        take = take - 1;
+
+                        Take(closet.at(take), player);
+                        closet.erase(closet.begin() + take);
                     }
                     else
                     {
                         cout << "Closet is empty!" << endl;
-                        return;
                     }
-
-                    cin >> take;
-
-                    take = inputCheck(closet.size(), take);
-
-                    take = take - 1;
-
-                    Take(closet.at(take), player);
-                    closet.erase(closet.begin() + take);
                 }
                 else
                     cout << "\nStorage is full!\n";

@@ -59,6 +59,10 @@ public:
 
     void outputRoomName()
     {
+        cout << "\"> You have entered the room. A kitchen that is no longer in any condtion to serve meals.\"\n";
+        cout <<"\"> A pantry that can treat thee with nothing more than roaches and unkown objects.\"\n";
+        cout<< "\"> An old, rusty oven with bones stored by the dozens.\"\n";
+        cout <<"\"> A cupboard that has suffered the bruality of time is placed ontop the oven. \"\n";
         cout << "\nYou are in the kitchen.\nYou see a pantry, an oven, and a cupboard.\n";
     }
 
@@ -330,7 +334,7 @@ public:
     {
         int choice;
         int choiceB;
-        cout << "\nWhich door would you like to investigate:\n1.StartRoom Door\n2.ClosetA Door\n";
+        cout << "\nWhich door would you like to investigate:\n1.StartRoom Door\n2.Closet_A Door\n";
 
         cin >> choice;
 
@@ -338,7 +342,7 @@ public:
 
         choice = choice - 1;
 
-        if (doors.at(choice) && choice == 1)
+        if (doors.at(choice) && choice == 0)
         {
             cout << "\nThe door is open and you pass through.\n";
             user->Moved(); // set moved to true
@@ -349,7 +353,7 @@ public:
 
             hasLeft = true;
         }
-        else if (!doors.at(choice) && choice == 2)
+        else if (!doors.at(choice) && choice == 1)
         {
             cout << "\nA container without hinges,lock,or key\nYet a golden treasure lies inside me\nWhat am I?\n";
             cout << "\nThe door is locked. Attempt to open it?\n1.Yes\n2.No\n";
@@ -482,14 +486,7 @@ public:
                         {
                             cout << i << "." << closet.at(i - 1)->getDescription() << endl;
                         }
-                    }
-                    else
-                    {
-                        cout << "Closet is empty!" << endl;
-                        return;
-                    }
-
-                    cin >> take;
+                         cin >> take;
 
                     take = inputCheck(closet.size(), take);
 
@@ -498,6 +495,14 @@ public:
                     Take(closet.at(take), player);
 
                     closet.erase(closet.begin() + take);
+                    }
+                    else
+                    {
+                        cout << "Closet is empty!" << endl;
+                        
+                    }
+
+                    
                 }
                 else
                     cout << "\nStorage is full!\n";
